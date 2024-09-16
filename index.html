@@ -4,23 +4,174 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Inventory Management</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="header">
     Order your Inventory
   </div>
-  <div class="sidebar">
+  <div class="sidebar-close sidebar">
+      <span class="icon icon-close">
+        <img src="assets/burger-menu.svg" alt="close" class="icon-image">
+      </span>
+      <ul class="side-list-close side-list">
+        <li>vendor list</li>
+        <li>report : daily, weekly, monthly</li>
+        <li>price list</li>
+        <li>menu items</li>
+        <li>visual metrics</li>
+      </ul>
 
   </div>
   <div class="categories">
+    <div>
+      <img src="./assets/categories/masala.png" alt="Masala and condiments">
+      <p>masala and condiments</p>
+    </div>
+    <div>
+      <img src="./assets/categories/dairy.png" alt="Dairy products and sauces, drinks">
+      <p>dairy products and sauces</p>
+    </div>
+    <div>
+      <img src="./assets/categories/packaging.png" alt="Packaging and Hygiene Stuffs">
+      <p>packaging and hygiene stuffs</p>
+    </div>
+    <div>
+      <img src="./assets/categories/ration.webp" alt="Ration">
+      <p>ration</p>
+    </div>
+    <div>
+      <img src="./assets/categories/veggies.webp" alt="Veggies">
+      <p>veggies</p>
+    </div>
+    <div>
+      <img src="./assets/categories/admin.png" alt="Administrative Requirements">
+      <p>administrative supply</p>
+    </div>
+    <div>
+      <img src="./assets/categories/repair.png" alt="Repairing and Maintainence">
+      <p>repair and maintainence</p>
+    </div>
+  </div>
+    <div class="items_list">
+    <h3>Item list</h3>
+    <template>
+        <div class="item_list_unit">
+          <div class="item_list_unit_values">
+            <label for="item_name">Item Name</label>
+          <div>
+            <input type="number" id="item_name" value="0" >
+          <input type="button" value="+" class="plus">
+          <input type="button" value="-" class="minus">
+          <select name="unit" id="units" required>
+            <option value="pcs">pcs</option>
+            <option selected value="kg">kg</option>
+            <option value="gm">gm</option>
+            <option value="rupee">rupees</option>
+            <option value="carton">carton</option>
+            <option value="katta">katta</option>
+            <option value="packet">pkt</option>
+          </select>
+          </div>
+          </div>
+          <p>last purchase : date, price and amount</p>
+         
+          <div class="vendor_list">
+            <label for="vendor">Supplier name :</label>
+            <input list="vendors" id="vendor" name="vendor-name" required placeholder="unknown">
+            <datalist id="vendors" >
+              <option  value="Shiv Paneer Bandhar">
+              <option value="Monu Patties">
+              <option value="Vaibhav">
+              <option value="Radheshyam">
+              <option value="Lala">
+              <option value="SK Masala">
+              <option value="Sachin Jain cold drinks">
+              <option value="Khandelwal">
+              <option value="MAX Super Market">
+              <option value="Local Veggies">
+              <option value="Roshan Lal sweets">
+              <option value="Krishna Plastic">
+              <option value="Other suppliers hawkers">
+
+            </datalist>
+          </div>
+          <div class="brand_list">
+            <label for="brand">brand name :</label>
+            <input list="brands" required id="brand" name="brand-name" placeholder="unknown">
+            <datalist id="brands">
+              <option value="veeba">
+              <option value="dr otekar">
+              <option value="my fresh">
+              <option value="local-supply">
+              <option value="adani wilmar">
+              <option value="bonn">
+              <option value="golden crown">
+              <option value="ashirwadh">
+              <option value="amul">
+              <option value="delight">
+              <option value="unknown" selected>
+            </datalist>
+  
+          </div>
+          <div class="value_addition">
+            <button class="value_addition--add">add</button>
+            <button class="value_addition--remove">clear</button>
+          </div>
+        </div>
+   
+    </template>
+    <div class="items_list_data">
+      
+    </div>
+  </div>
+
+  <div class="preview_list preview_list__close">
+
+    <span class="up-icon up-icon__close">
+      <img src="./assets/u-arrow.png" alt="^">
+    </span>
+    <h2 style="position: relative; top:2rem;">current list of item</h2>
+    <div class="preview_list--data preview-hide">
+      <template id="preview_template">
+        <div class="order_list_category">
+          <p class="order_list_name">Supplier Name</p>
+          <div class="order_list_items">
+            <div class="order_list_data">
+            <div class="order_list_data-value">
+              <span class="order_list_data-value--name-brand">
+                Item Name : Brand
+              </span>
+              <span class="order_list_data-value--quantity-unit">
+                Quantiy units
+              </span>
+            </div>
+            <button>remove</button>  
+          </div>
+          </div>
+        </div>
+      </template>
+      <div class="insertPreviewValue">
+
+      </div>
+      <div class="cta_button">
+        <div class="drag"></div>
+        <div class="drag_background"></div>
+      </div>
+    
+    </div>
     
   </div>
-  <div class="items_list">
 
-  </div>
-  <div class="preview_list">
+  <!-- <input type="button" value="Save the today's data"> -->
+  <!-- <input type="file" multiple> -->
 
-  </div>
+  <script src="app.js">
+
+  </script>
+
 </body>
 </html>

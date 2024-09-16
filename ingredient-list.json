@@ -1,0 +1,10 @@
+{
+ "Masala and condiments" :[ "white pepper", "kala namak", "peri peri", "kitchen king", "special momo masala", "ajino", "momo masala - peri peri", "salt - tata namak", "chaat masala - fruit chat", "seaseme", "oregano", "chilli flakes", "pizza seasoning", "kasthuri methi", "red color", "yellow color", "green color", "chicken masala", "meat masala", "dhaniya powder", "haldi", "jeera", "lal mirch powder", "chicken masala ", "kali mirch", "white pepper",  "degi mirch ", "cardamom powder", "kaju 1/2 pieces", "raw peanuts", "piri piri", "mustard oil", "ajwain", "mdh chaat masala" ],
+ "Dairy products and sauces, drinks":[ "paneer", "amul butter", "amul chesse", "amul creame", "dahi", "cream-delight", "tandoori mayonise", "cheese blend veeba", "delicious butter", "cheese slice", "ketchup can", "ketchup pouches", "mayonise", "chap", "pizza pasta sauce", "green chilli sauce can", "green chilli pouch", "chipotle sauce", "water bottle","vinegar", "soya sauce"
+],
+ "Packaging and Hygiene Stuffs":[ "1000 ml white container", "500 ml white container", "brown cover 1.5sari", "chowmein 8 no plate", "6x8 foldable momo pack", "milky 5 kg", "milky 1kg", "milky 1/2 kg", "garbage bag 24x30", "silver plate 7 no", "tissue paper", "fork", "spoon", "chutney donga", "7 no pc - burger donga", "3x5| 4x5", "plastic hand gloves", "bottle sauces", "450 ml silver container", "650 ml silver container", "tooth pick", "hair cover mask", "tejab and phenyle", "broom stick", "room freshner", "mosquito repellant", "cockroach, rat killer", "surf - liquid dishwash", "soap - surf" ],
+ "Ration": [ "corn flakes", "burger", "macroni / pasta", "chowmein", "mirchi red - sabut", "soyabean chura", "arrow root", "oil palm oil rag gold", "maida", "pasta - pipe shape", "pasta sauce", "mustard oil" ] ,
+ "Veggies":[ "mushroom", "carrot", "spring onion", "hari mirch", "pudina", "dhaniya", "sweet corn", "ginger", "garlic", "onion", "tomatoes", "simla mirch", "gobi", "aloo", "lemon" ],
+  "Administrative Requirements":["notebook and pen","dusting clothing"],
+  "Repairing and Maintainence":["parts of machines"]
+}

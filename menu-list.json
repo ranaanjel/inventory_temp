@@ -1,0 +1,13 @@
+{
+  "description":"Items currently we are selling to customer",
+  "chowmein":["normal vegetarian chowmein", "paneer chowmein", "singapuri chowmein", "ijwi special chowmein", "chilli garlic chowmein", "chilli garlic paneer chowmein"],
+  "chilli potato and other chilli options":["chilli potato", "honey chilli potato", "tandoori chilli potato", "veg manchurian"],
+  "chaap and its varities": ["tandoori chaap", "afgani chaap", "malai chaap", "paneer tikka", "afgani chaap roll", "tandoori chaap roll", "rumali roti"],
+   "momos":["Veg Momo","Paneer Momo","Veg kurkure","Paneer Kurkure","veg. Gravy Momo","paneer gravy momo","ijwi spc.Gravy momo","Special paneer Tadka Momo","Tandoori momo","afghani momo","malai momo"],
+  "pasta":["mix sauce paste ","white sauce pasta ","red sauce pasta"],
+  "spring rolls":["veg roll ","paneer roll ","veg kurkure roll ","paneer kurkure roll" ],
+  "burger":["Normal Tikki Burger","Fries cheese Burger","Aloo tikki cheese burger","Double Cheese burger ","IJWI Special Burger","Paneer tikki burger","crispy paneer tikki"],
+  "french-fries":["salty fries", "peri peri fries", "peri peri fries with dips", "loaded peri peri fries", "gravy fries"],
+  "sauces":["burger sauce", "momos szhewan sauce", "ijwi special sauce", "normal mayo", "tandoori mayo", "ketchup red pouch", "green sauce pouch", "mint sauce", "tandoori sauce", "chipotle sauce", "cheese blend veeba"]
+
+}
