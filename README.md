@@ -3,8 +3,8 @@
 similar to the grocery apps - UI and widgets
 
 - [x] adding the indexDB
-- [ ] ability to share to whatsapp, better fonts there - instead of remove - adding the share button;
-- [ ] price updates 
+- [x] ability to share to whatsapp, better fonts there - instead of remove - adding the share button;
+- [ ] price updates -- using the localstorage for easier access to it 
 - [ ] previous order information saving -- showing and value - changings.
 
 1. To create a simple share the request values.

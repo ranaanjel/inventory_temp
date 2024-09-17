@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Price Items</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="sidebar-close sidebar">
+    <span class="icon icon-close">
+      <img src="assets/burger-menu.svg" alt="close" class="icon-image">
+    </span>
+    <ul class="side-list-close side-list">
+      <li><a href="./vendor_share.html">vendor list</a></li>
+      <li>report : daily order</li>
+      <li><a href="./price-list.html">price list</a></li>
+      <li><a href="./menu.html">menu items</a></li>
+      <li>visual metrics</li>
+      <li><a href="./index.html">Home</a></li>
+    </ul>
+
+  </div>
+
+
+  <script >
+
+var sideIcon = document.querySelector(".icon-image");
+var sideBar = document.querySelector(".sidebar")
+var sideList = document.querySelector(".side-list")
+var icon = document.querySelector(".icon")
+sideIcon.addEventListener("pointerdown", function(evOb) {
+  var elem = evOb.target;
+  var status = elem.alt;
+  if (status == "close") {
+    sideBar.classList.remove(["sidebar-close"])
+    sideList.classList.remove(["side-list-close"])
+    icon.classList.remove(["icon-close"])
+  
+    sideBar.classList.add(["sidebar-open"])
+   
+    icon.classList.add(["icon-open"])
+
+    setTimeout(function () {
+      sideList.classList.add(["side-list-open"])
+    },300)
+
+    sideIcon.src = "./assets/close.svg";
+    sideIcon.alt = "open";
+  }else {
+        sideBar.classList.remove(["sidebar-open"])
+    sideList.classList.remove(["side-list-open"])
+    icon.classList.remove(["icon-open"])
+
+     sideBar.classList.add(["sidebar-close"])
+    sideList.classList.add(["side-list-close"])
+    icon.classList.add(["icon-close"])
+  
+
+
+    sideIcon.src = "./assets/burger-menu.svg";
+    sideIcon.alt = "close";
+
+  }
+})
+
+  </script>
+</body>
+</html>
