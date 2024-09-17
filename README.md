@@ -2,6 +2,11 @@
 
 similar to the grocery apps - UI and widgets
 
+- [x] adding the indexDB
+- [ ] ability to share to whatsapp, better fonts there - instead of remove - adding the share button;
+- [ ] price updates 
+- [ ] previous order information saving -- showing and value - changings.
+
 1. To create a simple share the request values.
 2. summary of the day's requirement
 3. expenditure - over month, week and other things.

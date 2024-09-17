@@ -5,10 +5,79 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vendor Listing</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    .listingData {
+      padding:2rem;
+      overflow: scroll;
+      height:90%;
+    }
+    .icon{
+      height:50px;
+      width:50px;
+    }
+    .icon img{
+      height:30px;
+      width:30px;
+    }
+
+    .order_list_items {
+      border-top:none ;
+      border-left : none;
+      border-right:none;
+
+    }
+    .order_list_name {
+      font-size:1.5rem;
+      display: flex;
+      justify-content: space-between;
+    }
+    .order_list_data-value {
+      font-size:1rem;
+      width:100%;
+      padding: 0.5rem;;
+    }
+    a {
+      color: var(--fg-color);
+      text-decoration: none;
+    }
+   .clearOrderItem { 
+    height:2rem;
+    border:1px solid var(--bg_color);
+    background:var(--fg_color);
+    color:var(--bg_color);
+    }
+
+    .clearOrderItem:active {
+    height:2rem;
+    border:1px solid var(--fg_color);
+    background:var(--bg_color);
+    color:var(--fg_color);
+  }
+
+
+  </style>
 </head>
 
 <body>
-  
+  <div class="sidebar-close sidebar">
+    <span class="icon icon-close">
+      <img src="assets/burger-menu.svg" alt="close" class="icon-image">
+    </span>
+    <ul class="side-list-close side-list">
+      <li><a href="#">vendor list</a></li>
+      <li>report : daily, weekly, monthly</li>
+      <li>price list</li>
+      <li>menu items</li>
+      <li>visual metrics</li>
+      <li><a href="./index.html">Home</a></li>
+    </ul>
+
+  </div>
+  <div class="listingData">
+  </div>
+  <button class="clearOrderItem">
+    Delete All the items
+  </button>
   <script src="app2.js"></script>
 </body>
 </html>

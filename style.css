@@ -12,6 +12,7 @@ html {
   height:0;
 }
 body {
+  font-family: "Poppins", sans-serif;
   margin: 0;
   background-color: var(--bg_color);
   color:var(--fg_color);
@@ -21,6 +22,10 @@ body {
   height: 100vh;
   overscroll-behavior: none;
   overflow: hidden;
+}
+a {
+  color: var(--fg-color);
+  text-decoration: none;
 }
 
 

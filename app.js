@@ -5,6 +5,7 @@ var sideIcon = document.querySelector(".icon-image");
 var sideBar = document.querySelector(".sidebar")
 var sideList = document.querySelector(".side-list")
 var icon = document.querySelector(".icon")
+
 var templateElem = document.querySelector("template");
 var dataListing = document.querySelector(".items_list_data")
 var categories = document.querySelectorAll(".categories img");
@@ -16,6 +17,7 @@ var categoryNodeElement ={};
 var currentItemOrder ={};
 let VendorElementList = {};
 let orderElementList = {};
+let currentVendorItems = {};
 let rootElementPreviewText ;
 
 var templateVendor = document.querySelector("#preview_template")
@@ -116,7 +118,9 @@ function renderItems(arrayListItems, category) {
       item_list_unit_value_minus.addEventListener("click", function (evOb){
         var number_input = (evOb.target.parentNode.querySelector("input[type=number]"));
         var currentValue = number_input.value ?? 0;
+       if(currentValue > 0) {
         number_input.value = currentValue -1;
+       }
       }) ;
       item_list_unit_value_plus.addEventListener("click", function (evOb){
         var number_input = (evOb.target.parentNode.querySelector("input[type=number]"));
@@ -201,16 +205,36 @@ function currentItemsList(supply, itemname, quant, unit, brand) {
   orderListDataBrandItem.innerHTML = itemname+" "+brand
   var orderListDataQuantity = templateValue.querySelector(".order_list_data-value--quantity-unit")
   orderListDataQuantity.innerHTML = quant + " "+unit;
+  
   console.log(orderListData)
-
+  
   var removeButton = orderListData.querySelector("button");
   removeButton.addEventListener("click", removeItemData)
-
   // append the value to the particular vendor - order_list_items
+
+  //adding id for easier deletion;
+  //currentElement
+  let currentElements = orderElementList[itemname]?.length ?? 0;
+  orderListData.id = "a"+(currentElements+1);
+
+  if(!VendorElementList[supply]) {
+    singleVendorListing(supply)
+  }
+
   var elementToInsertIn = (VendorElementList[supply]).querySelector(".order_list_items");
   elementToInsertIn.appendChild(orderListData);
+  if(!orderElementList[itemname]) {
+    orderElementList[itemname] = [orderListData]
+  }else {
+    orderElementList[itemname].push(orderListData)
+  }
+  //console.log(orderElementList)
 
-  orderElementList[itemname] = orderListData;
+  //var itemText = itemname+" " + quant +" " +unit;
+
+  // if(!currentVendorItems[supply]) {
+  //   currentVendorItems[supply] = [itemText];
+  // }
   //using the item name to remove the item;
   //console.log(orderElementList)
 
@@ -221,6 +245,19 @@ function currentItemsList(supply, itemname, quant, unit, brand) {
 
 }
 
+function removeItemData(evOb) {
+  var target = evOb.target.parentNode;
+  var supplyName = (target.parentNode.parentNode.firstElementChild.innerText)
+  var idName = "#"+target.id;
+  //console.log(target.id, VendorElementList, supplyName)
+ 
+ var updatingVendorELement = VendorElementList[supplyName].querySelector(idName).parentNode.parentNode;
+  console.log(updatingVendorELement)
+ target.remove();
+ VendorElementList[supplyName] = updatingVendorELement;
+  saveToIndexDB(VendorElementList);
+}
+
 //preview list items
 
 let previewElem = document.querySelector(".preview_list");
@@ -229,11 +266,11 @@ let imageValue = document.querySelector(".up-icon img")
 
 imageIcon.addEventListener("click", function(evOb) {
   var target = previewElem;
-  console.log(target)
+ // console.log(target)
     
   var dataList = document.querySelector(".preview_list--data");
   dataList.classList.toggle("preview-hide");
-  console.log(dataList);
+ // console.log(dataList);
  
   if(target.className.includes("close")) {
     previewElem.classList.remove(["preview_list__close"]);
@@ -253,8 +290,17 @@ var ctaButton = document.querySelector(".cta_button")
 buttonSelect.addEventListener("pointerdown", checkForAcceptance);
 
 function checkForAcceptance() {
+  console.log(orderElementList)
+  if(Object.keys(orderElementList).length== 0) {
+    alert("add some orders first")
+    return;
+  }
+
     buttonSelect.style.width = (250) + "px";
-    window.location.replace("./vendor_share.html")
+    
+    setTimeout(function() {
+      window.location.replace("./vendor_share.html")
+    },1000)
 }
 
 
@@ -263,9 +309,6 @@ fetch("./vendor_list.json").then(data=> data.json()).then(value => {
   vendorList = value["list"];
   vendorListing()
 })
-
-
-
 
 function vendorListing() {
 
@@ -283,14 +326,23 @@ function vendorListing() {
     //console.log(item, "value")
   }
   //not required here;
+
+}
+
+function singleVendorListing(item) {
+  var template = templateVendor.content.cloneNode(true).children[0];
+  rootElementPreviewText = template;
+  var supplyName = template.firstElementChild;
+  supplyName.innerHTML = item;
   
-
+  var orderListing = template.querySelector(".order_list_items")
+  orderListing.innerHTML = "";
+  
+  VendorElementList[item]=(template) 
+  insertElementBefore.appendChild(template)
 }
 
-function removeItemData(evOb) {
-  var target = evOb.target.parentNode;
- target.remove()
-}
+
 
 
 ///index DB 
@@ -319,6 +371,7 @@ indexDB.onsuccess = function (event) {
 }
 
 function saveToIndexDB(listValue) {
+  console.log(listValue , "----")
   var localDB = indexedDB.open("vendorOrder",1);
   localDB.onerror = function (err) {
     console.log(err)
