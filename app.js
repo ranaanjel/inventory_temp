@@ -89,6 +89,8 @@ data.json().then(d => {
 
 function renderItems(arrayListItems, category) {
 
+  var previousDataList = JSON.parse( lStore.getItem("itemInfo"))
+
   if (!(category in categoryNodeElement) ) {
     //adding the element - caching the elements
     categoryNodeElement[category] = [];
@@ -96,6 +98,15 @@ function renderItems(arrayListItems, category) {
     dataListing.innerHTML = "";
 
     for (var x of arrayListItems) {
+
+      //localStorage vlaue -- depending on the item name;
+      var prevPrice = previousDataList[x]["price"]; 
+      var prevBrand = previousDataList[x]["brand"];
+      var prevQuant = previousDataList[x]["quantity"];
+      var prevUnit = previousDataList[x]["unit"];
+      var prevSupply =previousDataList[x]["supplierName"];
+
+      console.log(x, prevBrand, prevPrice, prevQuant, prevUnit, prevSupply)
 
       var itemName = x;
       var templateContent = templateElem.content.cloneNode(true);
@@ -108,14 +119,17 @@ function renderItems(arrayListItems, category) {
       var item_list_unit_value_label = item_list_unit_value.children[0];
       item_list_unit_value_label.setAttribute("for",itemName) ;
       var item_list_unit_value_number = item_list_unit_value.children[1].firstElementChild;
+      
+      item_list_unit_value_number.value = prevQuant;
       //#TO DO : 
       //checking index DB for previous values and items; - pcs
       item_list_unit_value_number.id = itemName ;
       var item_list_unit_value_plus = item_list_unit_value.children[1].children[1];
       var item_list_unit_value_minus = item_list_unit_value.children[1].children[2];
       var item_list_unit_value_unit = item_list_unit_value.children[1].lastElementChild;
+
+      item_list_unit_value_unit.value = prevUnit;
       //console.log(item_list_unit_value_unit)
-      
       //listinening to the value changes ; 
       item_list_unit_value_minus.addEventListener("click", function (evOb){
         var number_input = (evOb.target.parentNode.querySelector("input[type=number]"));
@@ -130,15 +144,18 @@ function renderItems(arrayListItems, category) {
         number_input.value = Number(currentValue) + 1;
      });
       
-      
       var data_previous = rootElementChild[1];
-      data_previous.innerHTML = "No data: last purchase, price, amount"
+      data_previous.innerHTML = "---- data"
 
      //checking the indexDB -- update for the price, last orders and other things
 
       var vendor_list = rootElementChild[2].querySelector("input");
       var brand_list = rootElementChild[3].querySelector('input');
       var value_addition = rootElementChild[4]
+
+      vendor_list.value = prevSupply;
+      brand_list.value = prevBrand;
+  
 
       var value_addition_add = value_addition.children[0];
       var value_addition_remove = value_addition.children[1]
@@ -166,6 +183,9 @@ function renderItems(arrayListItems, category) {
             alert("please mention supplier name, brand name, unit")
             return ;
           }
+
+        //updating the value localstorage value 
+        localStorageUpdatingItems(itemValue, supplyName, brandName, quantity, unit);  
         currentItemsList(supplyName, itemValue, quantity, unit, brandName)
 
       })
@@ -424,21 +444,22 @@ if(!lStore.getItem('itemInfo') ) {
  var itemDescription = {}
  //creating object for each items : 
  //key : itemName 
-   //value : an object of -> price, amount, brand, suppliername, quantity, unit
+   //value : an object of -> price, amount, brand, supplierName, quantity, unit
 
    //initializing the values.
 function localItemSep(categoriesValue) {
+  if(Object.keys(JSON.parse(lStore.getItem("itemInfo"))).length == 0   ){
+    //console.log("first time")
   for (var category in categoriesValue) {
     for (var items of categoriesValue[category] ){
       var nameItem = items;
       var price = "N/A"
-      var amount = "N/A";
       var brand = "N/A";
       var supplierName = "N/A";
-      var quanity = "N/A";
-      var unit = "N/A" ;
+      var quantity = "N/A";
+      var unit = "pcs" ;
       itemDescription[nameItem] = {
-        price, amount, brand, supplierName, quanity, unit
+        price, brand, supplierName, quantity, unit
       } 
     }
   }
@@ -447,4 +468,16 @@ function localItemSep(categoriesValue) {
   lStore.setItem('itemInfo', string);
  //console.log(Object.keys(itemDescription))
   // updating the data wehn 
+ 
+  }
+}
+
+function localStorageUpdatingItems(item, supplier, brandName, quantity, unit) {
+  var data = JSON.parse(lStore.getItem("itemInfo"));
+  data[item]["supplierName"] = supplier;
+  data[item]["brand"] =brandName;
+  data[item]["quantity"] =quantity ;
+  data[item]["unit"] = unit ;
+  lStore.setItem("itemInfo", JSON.stringify(data));
+  console.log(data[item], lStore.getItem('itemInfo'))
 }

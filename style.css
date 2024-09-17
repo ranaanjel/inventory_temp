@@ -262,10 +262,13 @@ a {
   outline: none;
 }
 
+/* DATA TO ADD LATER ON */
+
 .item_list_unit p {
   min-width: 350px;
   text-align: start;
   height: 2rem;
+  display: none;
 }
 
 .item_list_unit .value_addition {
