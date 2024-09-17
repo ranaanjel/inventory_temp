@@ -128,7 +128,7 @@
     fetch("./price-list.json").then(d => d.json()).then(value =>{
       if(lStore.getItem("itemInfo") == "") {
         alert("please go the home page ")
-        window.location.reload("./index.html")
+        //window.location.reload("./index.html")
         return;
       }
       var listItem = JSON.parse(lStore.getItem("itemInfo"));
