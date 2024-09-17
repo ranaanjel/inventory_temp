@@ -448,7 +448,12 @@ if(!lStore.getItem('itemInfo') ) {
 
    //initializing the values.
 function localItemSep(categoriesValue) {
-  if(Object.keys(JSON.parse(lStore.getItem("itemInfo"))).length == 0   ){
+  console.log("hello")
+  console.log(lStore.getItem("itemInfo"))
+
+
+ // console.log(Object.keys().length)
+  if(lStore.getItem("itemInfo").length == 0   ){
     //console.log("first time")
   for (var category in categoriesValue) {
     for (var items of categoriesValue[category] ){
