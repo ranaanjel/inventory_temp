@@ -82,7 +82,9 @@ fetch("./ingredient-list.json").then(data => {
 data.json().then(d => {
     //all the list items
     items_list =d;
+    localItemSep(items_list)
   })
+
 })
 
 function renderItems(arrayListItems, category) {
@@ -410,3 +412,39 @@ function addingVendorlist(db, list) {
 }
 
 //indexedDB.deleteDatabase("vendorOrder")
+
+var lStore = localStorage;
+//setting the key
+ //storing the json stringify version only.
+
+if(!lStore.getItem('itemInfo') ) {
+   lStore.setItem("itemInfo","");
+ }
+
+ var itemDescription = {}
+ //creating object for each items : 
+ //key : itemName 
+   //value : an object of -> price, amount, brand, suppliername, quantity, unit
+
+   //initializing the values.
+function localItemSep(categoriesValue) {
+  for (var category in categoriesValue) {
+    for (var items of categoriesValue[category] ){
+      var nameItem = items;
+      var price = "N/A"
+      var amount = "N/A";
+      var brand = "N/A";
+      var supplierName = "N/A";
+      var quanity = "N/A";
+      var unit = "N/A" ;
+      itemDescription[nameItem] = {
+        price, amount, brand, supplierName, quanity, unit
+      } 
+    }
+  }
+
+  var string = JSON.stringify(itemDescription);
+  lStore.setItem('itemInfo', string);
+ //console.log(Object.keys(itemDescription))
+  // updating the data wehn 
+}

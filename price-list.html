@@ -5,9 +5,55 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Price Items</title>
   <link rel="stylesheet" href="style.css">
+  <style> 
+  body {
+    z-index: -10;
+  }
+    .price-data {
+      border:1px solid;
+      height:70%;
+      width:90%;
+      position: absolute;
+      top:50%;
+      left:50%;
+      transform: translate(-50%,-50%);
+      font-size: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items:center ;
+    }
+    .price-data > div{
+      border-bottom: 1px solid;
+      height: 30%;
+      width:80%;
+      padding: 4rem;
+    }
+    input {
+       background:var(--color1);
+       color:var(--fg-color);
+       height:2rem;
+       width: 100%;
+    }
+    button { 
+    height:2rem;
+    border:1px solid var(--bg_color);
+    background:var(--fg_color);
+    color:var(--bg_color);
+    }
+
+    button:active {
+    height:2rem;
+    border:1px solid var(--fg_color);
+    background:var(--bg_color);
+    color:var(--fg_color);
+  }
+
+
+  </style>
 </head>
 <body>
-  <div class="sidebar-close sidebar">
+  <div class="sidebar-close sidebar" style="z-index:100">
     <span class="icon icon-close">
       <img src="assets/burger-menu.svg" alt="close" class="icon-image">
     </span>
@@ -22,8 +68,90 @@
 
   </div>
 
+  <div class="price-data">
+    <div class="selection_item">
+      <label for="item">Select Item</label>
+      <input name="item" id="item" list="items">
+      <datalist id="items">
+      </datalist>
+    </div>
+    <div class="data_showcase">
+      Price : ₹
+    </div>
+    <div>
+      <input min="0" value="0" type="number" id="number_change" placeholder="put the price and select the item" title="select the item *required">
+      <button id="number_button">change</button>
+    </div>
+
+  </div>
 
   <script >
+   var lStore = localStorage;
+   //setting the key
+    //storing the json stringify version only.
+
+    if(!lStore.getItem('itemInfo')) {
+      lStore.setItem("itemInfo","")
+    }
+
+    document.querySelector("#item").addEventListener("change", function (evOb) {
+      var data = JSON.parse(lStore.getItem("itemInfo")); 
+      var gettingLocalStorage = data[evOb.target.value]["price"];
+      console.log(gettingLocalStorage, data)
+      document.querySelector(".data_showcase").innerHTML = "Price :  "+ gettingLocalStorage;
+    })
+
+    document.querySelector("#number_button").addEventListener("click", function(evOb) {
+      var item = document.querySelector("#item").value;
+      var numberValue = document.querySelector("#number_change").value;
+      if(numberValue < 1 ) {
+        alert("please write value greater 0")
+        return;
+      }else if(item == "") {
+        alert("please select the item")
+        return;
+      }
+
+      var data = JSON.parse(lStore.getItem("itemInfo"));
+      if(!(item in data)) {
+        alert("no items found sorry")
+        return;
+      }
+      data[item]["price"] ="₹ "+ numberValue;
+      lStore.setItem("itemInfo", JSON.stringify(data));
+      document.querySelector(".data_showcase").innerHTML = "Price : ₹ "+ numberValue ; 
+    });
+
+   //key : itemName 
+   //value : an object of -> price, amount, brand, supplyname, quantity, unit
+   
+    fetch("./price-list.json").then(d => d.json()).then(value =>{
+      if(lStore.getItem("itemInfo") == "") {
+        alert("please go the home page ")
+        window.location.reload("./index.html")
+      }
+      var listItem = JSON.parse(lStore.getItem("itemInfo"));
+   
+
+      for (var items in listItem) {
+        var priceValue = value[items];
+
+        var optionElem = document.createElement("option")
+        optionElem.value = items;
+        optionElem.innerText = items;
+        var selectElement = document.querySelector("datalist");
+        selectElement.appendChild(optionElem);
+
+        if(!listItem[items]["price"].includes("N/A")) {
+          continue 
+        }
+     //   console.log(priceValue)
+        listItem[items]["price"] = priceValue;
+      }
+      lStore.setItem("itemInfo", JSON.stringify(listItem));
+     // console.log(listItem, localStorage)
+    })
+   
 
 var sideIcon = document.querySelector(".icon-image");
 var sideBar = document.querySelector(".sidebar")
